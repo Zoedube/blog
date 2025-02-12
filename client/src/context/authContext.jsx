@@ -9,6 +9,8 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
+  axios.defaults.withCredentials = true;  
+
   // Login function
   const login = async (inputs) => {
     try {

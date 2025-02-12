@@ -54,6 +54,11 @@ const Home = () => {
     return doc.body.textContent;
   };
 
+  const truncateText = (text, maxLength = 180) => {
+    if (text.length <= maxLength) return text;
+    return text.substr(0, text.lastIndexOf(' ', maxLength)) + '...';
+  };
+
   //   const posts = [
   //     {
   //         id: 1,
@@ -98,7 +103,7 @@ const Home = () => {
               <Link className="link" to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
-              <p>{getText(post.desc)}</p>
+              <p>{truncateText(getText(post.desc))}</p>
               <button>
                 <Link to={`/post/${post.id}`} className="read-more-link">Read More</Link>
               </button>

@@ -245,79 +245,56 @@ footer {
   }
 }
 
-//SINGLE 
-.single {
+//SINGLE
+.single-post {
   display: flex;
-  gap: 50px;
+  flex-direction: column;
+  gap: 20px;
 
-  .content {
-    flex: 5;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  h1 {
+    font-size: 36px;
+    font-family: 'Playfair Display', serif;
+    color: $postTitleColor;
+  }
 
-    .post-image {
-      position: relative;
+  .post-image {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+  
+    img {
       width: 100%;
-      height: 300px;
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      // Add edit icons here
-      .edit {
-        position: absolute;
-        top: 10px; // Adjust position as needed
-        right: 10px;
-        display: flex;
-        gap: 10px;
-
-        img {
-          width: 25px;
-          height: 25px;
-          cursor: pointer;
-        }
+      height: auto;
+      object-fit: cover;
+    }
+  }
+  
+  .edit {
+    display: flex;
+    gap: 10px;
+    position: absolute; 
+    bottom: -535px; 
+  
+    img {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      transition: transform 0.2s;
+  
+      &:hover {
+        transform: scale(1.1);
       }
     }
+  }
+  
 
-    .user {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-
-      span {
-        font-weight: bold;
-      }
-    }
-
-    h1 {
-      font-size: 42px;
-      color: #333;
-    }
-
-    p {
-      text-align: justify;
-      line-height: 20px;
-    }
+  p {
+    font-size: 18px;
+    font-family: 'Prata', serif;
+    text-align: justify;
+    padding: 0 20px;
   }
 }
 
@@ -724,4 +701,7 @@ input {
       }
     }
   }
+}
+.home .posts .post .content {
+  justify-content: unset !important;
 }

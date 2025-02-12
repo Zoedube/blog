@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
-import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import Edit from "../img/edit.png";
+import Delete from "../img/delete.png";
 
 const Single = () => {
   const { id } = useParams();
@@ -59,11 +59,11 @@ const Single = () => {
 
   const handleAddComment = async () => {
     if (!newComment.trim()) return;
-
+  
     try {
       console.log("Attempting to add comment:", newComment); // Debugging comment addition
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/posts/${id}/comments`, {
-        content: newComment,
+        text: newComment, // Change content to text to match the backend expectation
       });
       console.log("New comment added:", res.data); // Debugging new comment response
       setComments((prev) => [res.data, ...prev]); // Append new comment to the list
@@ -72,6 +72,7 @@ const Single = () => {
       console.error("Failed to add comment:", err); // Log error details
     }
   };
+  
 
   const handleDeleteComment = async (commentId) => {
     try {
@@ -84,22 +85,7 @@ const Single = () => {
     }
   };
 
-  // Tiptap editor setup
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: post.fullDesc || "",
-    editable: false, // Viewer mode
-  });
 
-  if (loading) {
-    console.log("Loading post..."); // Log loading state
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    console.error("Error state:", error); // Log error state
-    return <div className="error-message">{error}</div>;
-  }
 
   return (
     <div className="single-post">
@@ -111,22 +97,16 @@ const Single = () => {
       </div>
 
       {/* Edit and Delete Icons */}
-      {currentUser?.username === post.username && (
         <div className="edit">
           <Link to={`/write?edit=2`} state={post}>
-            <img src="/edit.png" alt="Edit" />
+          <img src={Edit} alt="Edit" />
           </Link>
-          <img src="/delete.png" alt="Delete" onClick={handleDelete} />
+          <img src={Delete} alt="Delete" onClick={handleDelete} />
         </div>
-      )}
 
       {/* Post Description */}
       <p>{post.desc}</p>
 
-      {/* Full Description Rendered by Tiptap */}
-      <div className="post-fullDesc">
-        <EditorContent editor={editor} />
-      </div>
 
       {/* Comments Section */}
       <div className="comments-section">

@@ -39,24 +39,28 @@ export const login = (req, res) => {
     if (!isPasswordCorrect) return res.status(400).json("Wrong username or password!");
 
     // If password is correct, create a token
-    const token = jwt.sign({ id: data[0].id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: data[0].id }, process.env.JWT_SECRET, {
+      expiresIn: '1h', // Set expiration for the token (1 hour in this case)
+    });
 
     // Exclude password from response
     const { password, ...other } = data[0];
 
     // Set the JWT token as a cookie and send the user data as response
     res.cookie("access_token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", 
-      sameSite: "none", 
-    }).status(200).json(other);
+      httpOnly: true, // Cookie is only accessible via HTTP requests (not JavaScript)
+      secure: process.env.NODE_ENV === "production", // Use secure cookies only in production
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Allow cross-origin cookies in production
+      maxAge: 60 * 60 * 1000, // Set cookie expiration time (1 hour)
+    }).status(200).json(other); // Send the user data (excluding password)
   });
 };
 
 // Logout function
 export const logout = (req, res) => {
   res.clearCookie("access_token", {
-    sameSite: "none",  
+    sameSite: "None",  
     secure: process.env.NODE_ENV === "production",  
   }).status(200).json("User has been logged out.");
 };
+
