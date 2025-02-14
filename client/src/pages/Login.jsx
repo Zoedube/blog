@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 
 
+//Code for logining into blog
+
 const Login = () => {
   const [inputs, setInputs] = useState({
     username: "",
@@ -24,7 +26,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, inputs); // Use import.meta.env.VITE_API_URL
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, inputs);
       navigate("/");
     } catch (err) {
       setError(err.response.data)

@@ -5,6 +5,7 @@ import { AuthContext } from "../context/authContext";
 import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 
+//Code for an individual post 
 const Single = () => {
   const { id } = useParams();
   const [post, setPost] = useState({});
@@ -15,28 +16,29 @@ const Single = () => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Fetch the post and its comments
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/posts/${id}`);
-        console.log("Post fetched:", res.data); // Debugging post fetch
+        console.log("Post fetched:", res.data);
         setPost(res.data);
       } catch (err) {
-        console.error("Failed to fetch post:", err); // Log error details
+        console.error("Failed to fetch post:", err);
         setError("Failed to fetch post.");
       } finally {
         setLoading(false);
       }
     };
 
+    //Code for handling adding and deleting comments
     const fetchComments = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/posts/${id}/comments`);
-        console.log("Comments fetched:", res.data); // Debugging comments fetch
+        console.log("Comments fetched:", res.data);
         setComments(res.data);
       } catch (err) {
-        console.error("Failed to fetch comments:", err); // Log error details
+        console.error("Failed to fetch comments:", err);
         setError("Failed to fetch comments.");
       }
     };
@@ -47,68 +49,65 @@ const Single = () => {
 
   const handleDelete = async () => {
     try {
-      console.log("Attempting to delete post with ID:", id); // Debugging post deletion
+      console.log("Attempting to delete post with ID:", id);
       await axios.delete(`${import.meta.env.VITE_API_URL}/api/posts/${id}`);
-      navigate("/"); // Navigate to home after deletion
+      navigate("/");
       console.log("Post deleted successfully");
     } catch (err) {
-      console.error("Failed to delete post:", err); // Log error details
+      console.error("Failed to delete post:", err);
       setError("Failed to delete post.");
     }
   };
 
   const handleAddComment = async () => {
     if (!newComment.trim()) return;
-  
+
     try {
-      console.log("Attempting to add comment:", newComment); // Debugging comment addition
+      console.log("Attempting to add comment:", newComment);
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/posts/${id}/comments`, {
-        text: newComment, // Change content to text to match the backend expectation
+        text: newComment,
       });
-      console.log("New comment added:", res.data); // Debugging new comment response
-      setComments((prev) => [res.data, ...prev]); // Append new comment to the list
-      setNewComment(""); // Clear input field
+      console.log("New comment added:", res.data);
+      setComments((prev) => [res.data, ...prev]);
+      setNewComment("");
     } catch (err) {
-      console.error("Failed to add comment:", err); // Log error details
+      console.error("Failed to add comment:", err);
     }
   };
-  
+
 
   const handleDeleteComment = async (commentId) => {
     try {
-      console.log("Attempting to delete comment with ID:", commentId); // Debugging comment deletion
+      console.log("Attempting to delete comment with ID:", commentId);
       await axios.delete(`${import.meta.env.VITE_API_URL}/api/posts/${id}/comments/${commentId}`);
       setComments((prev) => prev.filter((comment) => comment.id !== commentId));
       console.log("Comment deleted successfully");
     } catch (err) {
-      console.error("Failed to delete comment:", err); // Log error details
+      console.error("Failed to delete comment:", err);
     }
   };
-
 
 
   return (
     <div className="single-post">
       <h1>{post.title}</h1>
 
-      {/* Post Image */}
       <div className="post-image">
         <img src={post.img || "https://via.placeholder.com/150"} alt="Post" />
       </div>
 
-      {/* Edit and Delete Icons */}
-        <div className="edit">
-          <Link to={`/write?edit=2`} state={post}>
+      <div className="edit">
+        <Link to={`/write?edit=2`} state={post}>
           <img src={Edit} alt="Edit" />
-          </Link>
-          <img src={Delete} alt="Delete" onClick={handleDelete} />
-        </div>
+        </Link>
+        <img src={Delete} alt="Delete" onClick={handleDelete} />
+      </div>
 
-      {/* Post Description */}
-      <p>{post.desc}</p>
+      <div
+        className="post-content"
+        dangerouslySetInnerHTML={{ __html: post.fullDesc }}
+      />
 
-
-      {/* Comments Section */}
       <div className="comments-section">
         <h2>Comments</h2>
         <div className="add-comment">
@@ -120,15 +119,13 @@ const Single = () => {
           <button onClick={handleAddComment}>Post Comment</button>
         </div>
 
-        {/* Comments List */}
         <div className="comments-list">
           {comments.length > 0 ? (
             comments.map((comment) => (
               <div key={comment.id} className="comment">
                 <div className="comment-header">
                   <img
-                    src={comment.userImg || "https://via.placeholder.com/30"}
-                    alt={comment.username}
+                    src={comment.userImg || "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg"}
                     className="comment-user-img"
                   />
                   <span className="comment-username">{comment.username}</span>
@@ -145,7 +142,7 @@ const Single = () => {
               </div>
             ))
           ) : (
-            <p>No comments yet. Be the first to comment!</p>
+            <p>No comments yet. Register and be the first to comment!</p>
           )}
         </div>
       </div>

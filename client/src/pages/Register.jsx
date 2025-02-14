@@ -1,8 +1,10 @@
-import React, { useState, useContext } from "react"; // Import useContext here
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/authContext"; 
 
+
+//Code to use register page on the blog
 const Register = () => {
   const [inputs, setInputs] = useState({
     username: "",
@@ -12,9 +14,9 @@ const Register = () => {
   const [err, setError] = useState(null);
 
   const navigate = useNavigate();
-  const { currentUser } = useContext(AuthContext); // Access currentUser from context
+  const { currentUser } = useContext(AuthContext); 
 
-  console.log(currentUser); // Debugging to check the currentUser
+  console.log(currentUser); 
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -27,9 +29,8 @@ const Register = () => {
         `${import.meta.env.VITE_API_URL}/api/auth/register`,
         inputs
       );
-      navigate("/login"); // Redirect to login after successful registration
+      navigate("/login"); 
     } catch (err) {
-      // Set error message from the response
       setError(err.response ? err.response.data : "Registration failed. Please try again.");
     }
   };
@@ -37,7 +38,7 @@ const Register = () => {
   return (
     <div className="auth">
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}> {/* Using onSubmit to handle form submission */}
+      <form onSubmit={handleSubmit}> 
         <input
           required
           type="text"
@@ -59,8 +60,8 @@ const Register = () => {
           name="password"
           onChange={handleChange}
         />
-        <button type="submit">Register</button> {/* Use type="submit" for form submission */}
-        {err && <p>{err}</p>} {/* Display error message if there's an error */}
+        <button type="submit">Register</button>
+        {err && <p>{err}</p>}
         <span>
           Do you have an account? <Link to="/login">Login</Link>
         </span>

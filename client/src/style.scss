@@ -1,8 +1,9 @@
+//Code for font imports 
 @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-$postTitleColor: #0B090C; // Color for post titles
-$postTitleHoverColor: #0B090C; // Hover color for post titles
+$postTitleColor: #0B090C; 
+$postTitleHoverColor: #0B090C;
 
 html {
   background-color: #F5EFEB;
@@ -41,62 +42,83 @@ html {
   }
 }
 
+//Navbar Code
 .navbar {
   background-color: #F5F3EF;
-  padding: 30px;
-  /* Remove left and right padding */
-  width: 100%;
-  /* Set the width to 100% to avoid any gaps on the right */
-  box-sizing: border-box;
+  padding: 25px 40px;
+  border-bottom: 1px solid rgba(11, 9, 12, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
 
   .container {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     width: 100%;
-    max-width: 3000px;
-    /* Adjust this as needed */
+    max-width: 1400px;
     margin: 0 auto;
-    /* Center the container on the page */
-    gap: 415px;
   }
 
   .logo img {
     width: 120px;
-    /* Logo size */
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .links {
     display: flex;
     align-items: center;
-    gap: 15px;
-    /* Controls space between links */
+    gap: 32px;
     font-family: 'Playfair Display', serif;
 
-    .link,
-    .write,
-    span {
+    .link, .write {
       text-decoration: none;
-      color: black;
-      font-size: 30px;
-      font-weight: 500 !important;
-      /* Force font weight */
-      font-family: inherit;
-      cursor: pointer;
+      color: #0B090C;
+      font-size: 25px;
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #0B090C;
+        transition: width 0.3s ease;
+      }
+      
+      &:hover::after {
+        width: 100%;
+      }
+    }
 
-      h6 {
-        color: black;
-        font-weight: 500;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: black;
-        }
+    .write {
+      padding: 8px 20px;
+      border: 2px solid #0B090C;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: #0B090C;
+        color: #F5F3EF;
+      }
+      
+      &::after {
+        display: none;
       }
     }
   }
 }
 
+//Footer Code
 footer {
   margin-top: 100px;
   background-color: #F5EFEB;
@@ -133,18 +155,18 @@ footer {
   }
 }
 
-//HOME
+//Home Code 
 
 .home {
   .posts {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
-    gap: 150px;
+    gap: 50px;
 
     .post {
       display: flex;
-      gap: 100px;
+      gap: 50px;
 
       &:nth-child(2n + 1) {
         flex-direction: row-reverse;
@@ -153,7 +175,7 @@ footer {
       .img {
         flex: 2;
         position: relative;
-        margin-bottom: 100px;
+        margin-bottom: 30px;
 
         &::after {
           content: "";
@@ -181,23 +203,23 @@ footer {
 
         h1 {
           font-size: 42px;
-          color: $postTitleColor; // Apply the defined color
+          color: $postTitleColor; 
           font-family: 'Playfair Display', serif;
-          text-decoration: none; // Removes underlining
+          text-decoration: none; 
           margin-bottom: 4px;
-          /* Adjust margin to reduce space below title */
-          transition: color 0.3s ease; // Smooth transition for hover
+          
+          transition: color 0.3s ease; 
 
           &:hover {
-            color: $postTitleHoverColor; // Change color on hover
+            color: $postTitleHoverColor; 
           }
         }
 
         a {
-          text-decoration: none; // Ensures link has no underline
+          text-decoration: none; 
 
           &:hover {
-            text-decoration: none; // Keeps underline removed on hover
+            text-decoration: none; 
           }
         }
 
@@ -209,20 +231,14 @@ footer {
         button {
           width: 60;
           padding: 8px 16px;
-          /* Slightly larger padding for a more prominent button */
           border: 2px solid black;
           cursor: pointer;
           background-color: white;
-          /* White background */
           color: black;
-          /* Black text */
           font-family: 'Prata', serif;
-          /* Match the font with your content */
           font-size: 16px;
           font-weight: 150;
-          /* Slightly bolder font */
           text-transform: uppercase;
-          /* Optional: for a bold look */
           transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 
 
@@ -230,14 +246,11 @@ footer {
             outline: none;
           }
 
-          /* Ensure the Read More link inside the button is styled properly */
+    
           a {
             color: black;
-            /* Ensure the link color is black */
             text-decoration: none;
-            /* Remove the default underline */
             font-weight: 300;
-            /* Make the link bold */
           }
         }
       }
@@ -245,25 +258,27 @@ footer {
   }
 }
 
-//SINGLE
+//Single post code 
 .single-post {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  align-items: flex-start; 
 
   h1 {
-    font-size: 36px;
-    font-family: 'Playfair Display', serif;
-    color: $postTitleColor;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left; 
   }
 
   .post-image {
     width: 100%;
-    max-width: 800px;
-    position: relative;
-    z-index: 1;
-    align-items: center;
-  
+    height: auto;
+    margin-bottom: 20px;
+    
     img {
       width: 100%;
       height: auto;
@@ -274,30 +289,27 @@ footer {
   .edit {
     display: flex;
     gap: 10px;
-    position: absolute; 
-    bottom: -535px; 
-  
+    margin: 10px 0 20px 0;
+    
     img {
       width: 24px;
       height: 24px;
       cursor: pointer;
       transition: transform 0.2s;
-  
+      
       &:hover {
         transform: scale(1.1);
       }
     }
   }
-  
 
-  p {
-    font-size: 18px;
-    font-family: 'Prata', serif;
-    text-align: justify;
-    padding: 0 20px;
+  .post-content {
+    width: 100%;
+    text-align: left;
   }
 }
 
+//Single post category post
 .menu {
   margin-top: 20px;
 }
@@ -384,9 +396,9 @@ input {
     border: none;
   }
 }
-/* Updated styles for the Write page buttons */
 
-/* Basic editor styles */
+
+//Write page code 
 .write {
   display: flex;
   gap: 20px;
@@ -473,7 +485,7 @@ input {
   }
 }
 
-/* Tiptap editor toolbar button styles */
+//TipTap rich text editor code 
 .editor-toolbar {
   display: flex;
   gap: 10px;
@@ -496,7 +508,6 @@ input {
   }
 }
 
-/* Styling for the editor toolbar */
 .tiptap {
   :first-child {
     margin-top: 0;
@@ -561,7 +572,7 @@ input {
   }
 }
 
-/* Updated styles for the Category Menu */
+//Category menu in toolbar code 
 .category-container {
   display: flex;
   flex-wrap: wrap;
@@ -589,40 +600,33 @@ input {
   transition: transform 0.2s ease;
 }
 
-/* Hover effect for category labels */
 .category-item:hover label {
   color: black;
 }
 
-/* Hover effect for radio buttons */
+
 .category-item input[type="radio"]:hover {
   transform: scale(1.3);
 }
 
-/* Selected category */
 .category-item input[type="radio"]:checked + label {
   color: black;
 }
 
-// Add styles for login and register pages
+//Register and Login Code 
 
 .auth {
   display: flex;
   flex-direction: column;
-  /* Stack elements vertically */
   align-items: center;
   justify-content: center;
-  /* This will vertically center the content */
   min-height: 100vh;
-  /* Take full height of the viewport */
   padding: 20px;
   width: 100%;
   max-width: 500px;
-  /* Controls the width of the auth box */
   margin: 0 auto;
   background-color: #fff;
   border-radius: 8px;
-  /* Optional: add rounded corners to the form box */
   box-sizing: border-box;
 
   form {
@@ -635,14 +639,11 @@ input {
     max-width: 400px;
     width: 100%;
     font-family: 'Playfair Display', serif;
-    /* Consistent with navbar and post titles */
-
+    
     h1 {
       font-size: 36px;
       color: #0B090C;
-      /* Match the color for consistency */
       margin-bottom: 20px;
-      /* Add space between the title and form */
       text-align: center;
     }
 
@@ -653,11 +654,9 @@ input {
       margin-bottom: 15px;
       font-size: 16px;
       font-family: 'Prata', serif;
-      /* Same font as posts */
 
       &:focus {
         border-color: #0B090C;
-        /* Focus color consistency */
         outline: none;
       }
     }
@@ -695,8 +694,6 @@ input {
 
         &:hover {
           color: #555;
-          /* Subtle hover effect */
-
         }
       }
     }
@@ -704,4 +701,109 @@ input {
 }
 .home .posts .post .content {
   justify-content: unset !important;
+}
+
+//Comments code
+.comments-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px 0; 
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 24px;
+    color: #0B090C;
+    letter-spacing: 0.5px;
+    text-align: left;
+  }
+
+  .add-comment {
+    margin-bottom: 32px;
+    width: 100%;
+    
+    textarea {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      background: #f8f8f8;
+      font-family: 'Prata', serif;
+      font-size: 14px;
+      resize: vertical;
+      min-height: 60px;
+      margin-bottom: 12px;
+      
+      &:focus {
+        outline: none;
+        background: #f2f2f2;
+      }
+    }
+
+    button {
+      font-family: 'Prata', serif;
+      font-size: 13px;
+      color: #0B090C;
+      background: none;
+      border: 1px solid #0B090C;
+      padding: 8px 20px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      
+      &:hover {
+        background: #0B090C;
+        color: white;
+      }
+    }
+  }
+
+  .comments-list {
+    width: 100%;
+    
+    .comment {
+      margin-bottom: 24px;
+      
+      .comment-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        gap: 12px;
+
+        .comment-user-img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        
+        .comment-username {
+          font-family: 'Playfair Display', serif;
+          font-size: 18px;
+          font-weight: 60px;
+          color: #0B090C;
+          margin-right: auto;
+        }
+
+        .delete-comment-btn {
+          font-size: 12px;
+          color: #999;
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          
+          &:hover {
+            color: #0B090C;
+          }
+        }
+      }
+
+      .comment-content {
+        font-family: 'Prata', serif;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
+      }
+    }
+  }
 }
