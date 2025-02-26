@@ -4,8 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "build": "echo Hello"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
