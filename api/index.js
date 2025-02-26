@@ -32,6 +32,7 @@ app.use(cors({
 const allowedOrigins = [
   "https://blog-rjbl.vercel.app", // ✅ Your Vercel frontend URL
   "blog-rjbl-7dj14ydv5-zoedubes-projects.vercel.app",
+  "https://blog-rjbl-7dj14ydv5-zoedubes-projects.vercel.app",
   "http://localhost:5173" // ✅ For local development (optional)
 ];
 
