@@ -43,7 +43,7 @@ const Write = () => {
       }
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("http://localhost:8800/api/upload", formData);
+      const res = await axios.post("https://blog-2-5wa7.onrender.com/api/upload", formData);
       return res.data.url;
     } catch (err) {
       console.error("Upload error:", err);
@@ -54,7 +54,7 @@ const Write = () => {
   const handleSaveDraft = async () => {
     const imgUrl = file ? await upload() : "";
     try {
-      await axios.post("http://localhost:8800/api/posts/", {
+      await axios.post("https://blog-2-5wa7.onrender.com/api/posts/", {
         title,
         desc: editor?.getHTML(),
         cat,
@@ -75,14 +75,14 @@ const Write = () => {
     const imgUrl = file ? await upload() : "";
     try {
       state
-        ? await axios.put(`http://localhost:8800/api/posts/${state.id}`, {
+        ? await axios.put(`https://blog-2-5wa7.onrender.com/api/posts/${state.id}`, {
           title,
           fullDesc: editor?.getHTML(),
           cat,
           img: imgUrl,
           status,
         })
-        : await axios.post("http://localhost:8800/api/posts/", {
+        : await axios.post("https://blog-2-5wa7.onrender.com/api/posts/", {
           title,
           fullDesc: editor?.getHTML(),
           cat,
