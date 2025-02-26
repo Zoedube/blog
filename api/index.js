@@ -28,7 +28,19 @@ app.use(cors({
 }));
 */
 
-app.use(cors({ origin: "*", methods: "GET,POST,PUT,DELETE", credentials: true }));
+// ✅ Fix CORS issue
+const allowedOrigins = [
+  "https://blog-rjbl.vercel.app", // ✅ Your Vercel frontend URL
+  "http://localhost:5173" // ✅ For local development (optional)
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins, // 🔥 Only allow requests from these domains
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true, // 🔥 Required for cookies/sessions/auth
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
