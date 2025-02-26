@@ -21,10 +21,12 @@ const __dirname = dirname(__filename);
 const app = express();
 
 // Middleware to allow CORS & access to cookies
+/*
 app.use(cors({
   origin: "http://localhost:5173", 
   credentials: true  
 }));
+*/
 
 app.use(cors({ origin: "*", methods: "GET,POST,PUT,DELETE", credentials: true }));
 
