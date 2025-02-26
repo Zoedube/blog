@@ -52,6 +52,10 @@ app.post("/api/upload", upload.single("file"), function (req, res) {
   }
 });
 
+app.get("/status", (req, res) => {
+  res.json({status:"Backend is working"})
+})
+
 // Serve uploaded images statically
 app.use("/upload", express.static(path.join(__dirname, "../client/public/upload")));  
 
