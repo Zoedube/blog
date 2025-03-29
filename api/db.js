@@ -1,11 +1,11 @@
 import mysql from "mysql2";
 
 export const db = mysql.createConnection({
-  host: "sql8.freesqldatabase.com",
-  user: "sql8764805",
-  password: "gBEIW25Y5c",
-  database: "sql8764805",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  port: process.env.DB_PORT,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
-
 
 
