@@ -28,12 +28,12 @@ app.use(cors({
 }));
 */
 
-// ✅ Fix CORS issue
+// Fix CORS issue
 const allowedOrigins = [
-  "https://blog-rjbl.vercel.app", // ✅ Your Vercel frontend URL
+  "https://blog-rjbl.vercel.app", 
   "blog-rjbl-7dj14ydv5-zoedubes-projects.vercel.app",
   "https://blog-rjbl-7dj14ydv5-zoedubes-projects.vercel.app",
-  "http://localhost:5173" // ✅ For local development (optional)
+  "http://localhost:5173" 
 ];
 
 app.use(
